@@ -61,7 +61,7 @@ if __name__ == '__main__':
     ftp = FTP('1.34.62.109')
     ftp.login('bluekidds','aaa71421')
 
-qqqqqq   
+   
     while True:
         # grab the frame from camera
         frame = fast.read()
