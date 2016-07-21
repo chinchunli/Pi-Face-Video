@@ -28,8 +28,8 @@ if __name__ == '__main__':
     time.sleep(5.0)
 
     print('Start Setting writer')
-    fourcc = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
-    
+    #fourcc = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
+    fourcc = cv2.cv.CV_FOURCC('m', 'j', 'p', 'g')
     writer = cv2.VideoWriter(filename, fourcc, 15.0, (640, 480))
     #fast.setWriter(filename)
     if writer is None:
