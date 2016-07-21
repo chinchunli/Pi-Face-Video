@@ -21,7 +21,9 @@ class WebcamVideoStream(object):
 
     def start(self):
         # start the thread to read frames from the video stream
-        Thread(target=self.update, args=()).start()
+        t = Thread(target=self.update, args=())
+        t.daemon = True
+        t.start()
         return self
 
     def update(self):
@@ -40,14 +42,13 @@ class WebcamVideoStream(object):
 
     def setWriter(self, fileName, param=None):
         #if param is not None:
-        fourcc = cv2.cv.FOURCC(*'mp4v')
-        self.writer = cv2.VideoWriter(fileName, fourcc, 15.0, (int(self.weight),int(self.height)))
+        #cv2.VideoWriter('output.avi',cv2.cv.CV_FOURCC('M','J','P','G'), 20.0, (640,480))
+        #fourcc = cv2.cv.CV_FOURCC('M','J','P','G')
+        self.writer = cv2.VideoWriter(fileName, cv2.cv.CV_FOURCC('M','J','P','G'), 15.0, (int(self.weight),int(self.height)))
 
     def write(self, frame):
         if self.writer is not None:
             self.writer.write(frame)
 
     def release(self):
-        if self.writer is not None:
-            self.writer.release()
         self.stream.release()

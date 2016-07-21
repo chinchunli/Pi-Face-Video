@@ -3,7 +3,6 @@ from piWebStream import WebcamVideoStream
 #from picamera.array import PiRGBArray
 #from picamera import PiCamera
 import argparse
-import imutils
 import time
 import cv2
 from ftplib import FTP
@@ -17,18 +16,23 @@ import sys
 
 FPS = 15
 PI_ID = 'FF1'   # ID of Device
-TOTAL_SECONDS = 648000  # Change to 30s for test
+TOTAL_SECONDS = 300  # Change to 30s for test
 
 if __name__ == '__main__':
     
     today = date.today()
-    filename=PI_ID + '_' + str(today.month) + '_' + str(today.day) + '_' + str(today.year) +'mp4v'
+    filename = PI_ID + '_' + str(today.month) + '_' + str(today.day) + '_' + str(today.year) + '.avi'
+    
+    
     fast = WebcamVideoStream(src=0, resolution=(640, 480)).start()
     time.sleep(5.0)
 
     print('Start Setting writer')
-    fast.setWriter(filename)
-    if fast.writer is None:
+    fourcc = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
+    
+    writer = cv2.VideoWriter(filename, fourcc, 15.0, (640, 480))
+    #fast.setWriter(filename)
+    if writer is None:
         print('writer Fail')
     else:
         print('writer successfully set')
@@ -38,15 +42,17 @@ if __name__ == '__main__':
     #ftp.retrbinary('RETE '+filename, open(filename,'wb').write)
     #ftp.storbinary('STOR '+filename, open(filename,'rb'))
     
-    
+    print('Start Recording...')
     for _ in xrange(TOTAL_SECONDS):
         
         for i in xrange(FPS):
             frame = fast.read()
-        fast.write(frame)
+        
+        writer.write(frame)
 	
-
-    cv2.destroyAllWindows()
     fast.stop()
+    print('Camera release..')
     fast.release()
-    
+    print('Writer release..')
+    writer.release()
+    cv2.destroyAllWindows()
