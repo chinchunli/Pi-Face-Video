@@ -17,18 +17,18 @@ import sys
 
 FPS = 15
 PI_ID = 'FF1'   # ID of Device
-TOTAL_SECONDS = 21600  # Change to 30s for test
+TOTAL_SECONDS = 648000  # Change to 30s for test
 
 if __name__ == '__main__':
     
     today = date.today()
-    filename=PI_ID + '_' + str(today.month) + '_' + str(today.day) + '_' + str(today.year)
+    filename=PI_ID + '_' + str(today.month) + '_' + str(today.day) + '_' + str(today.year) +'mp4v'
     fast = WebcamVideoStream(src=0, resolution=(640, 480)).start()
     time.sleep(5.0)
 
     print('Start Setting writer')
     fast.setWriter(filename)
-    if writer is None:
+    if fast.writer is None:
         print('writer Fail')
     else:
         print('writer successfully set')
@@ -49,4 +49,4 @@ if __name__ == '__main__':
     cv2.destroyAllWindows()
     fast.stop()
     fast.release()
-    out.release()
+    
