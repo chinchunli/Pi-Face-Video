@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
     print('Start Setting writer')
     #fourcc = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
-    fourcc = cv2.cv.CV_FOURCC('m', 'j', 'p', 'g')
+    fourcc = cv2.VideoWriter_fourcc(*'MJPG')
     writer = cv2.VideoWriter(filename, fourcc, 15.0, (640, 480))
     #fast.setWriter(filename)
     if writer is None:
@@ -55,4 +55,4 @@ if __name__ == '__main__':
     fast.release()
     print('Writer release..')
     writer.release()
-    cv2.destroyAllWindows()
+    
