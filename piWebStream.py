@@ -1,17 +1,18 @@
 # import the necessary packages
 from threading import Thread
 import cv2
+import numpy as np
 
 
 class WebcamVideoStream(object):
     def __init__(self, resolution=(320, 240), src=0):
         # initialize the video camera stream and read the first frame
         # from the stream
-        self.weight, self.height = resolution
+        # self.weight, self.height = resolution
         self.stream = cv2.VideoCapture(src)
-        self.stream.set(3, self.weight)		# I have found this to be about the highest-
-        self.stream.set(4, self.height)
-        #(self.grabbed, self.frame) = self.stream.read()
+        #self.stream.set(3, self.weight)		# I have found this to be about the highest-
+        #self.stream.set(4, self.height)
+        #_, self.frame = self.stream.read()
         
 
         # initialize the variable used to indicate if the thread should

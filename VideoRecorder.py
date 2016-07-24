@@ -16,7 +16,7 @@ import sys
 
 FPS = 15
 PI_ID = 'FF1'   # ID of Device
-TOTAL_SECONDS = 300  # Change to 30s for test
+TOTAL_SECONDS =  1000 # Change to 30s for test
 
 if __name__ == '__main__':
     
@@ -24,13 +24,17 @@ if __name__ == '__main__':
     filename = PI_ID + '_' + str(today.month) + '_' + str(today.day) + '_' + str(today.year) + '.avi'
     
     
-    fast = WebcamVideoStream(src=0, resolution=(640, 480)).start()
+    fast = WebcamVideoStream(src=0, resolution=(320, 240)).start()
     time.sleep(5.0)
 
     print('Start Setting writer')
+    
+    test_frame = fast.read()
+    height, width, _ = test_frame.shape
+    #print(width, height)
     #fourcc = cv2.cv.CV_FOURCC('m', 'p', '4', 'v')
     fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-    writer = cv2.VideoWriter(filename, fourcc, 15.0, (640, 480))
+    writer = cv2.VideoWriter(filename, fourcc, 30.0, (width, height))
     #fast.setWriter(filename)
     if writer is None:
         print('writer Fail')
@@ -43,8 +47,9 @@ if __name__ == '__main__':
     #ftp.storbinary('STOR '+filename, open(filename,'rb'))
     
     print('Start Recording...')
-    for _ in xrange(TOTAL_SECONDS):
-        
+    for frame_num in xrange(TOTAL_SECONDS):
+        if (frame_num % 500) == 0:
+            print('Every 500s')   
         for i in xrange(FPS):
             frame = fast.read()
         
@@ -52,7 +57,8 @@ if __name__ == '__main__':
 	
     fast.stop()
     print('Camera release..')
-    fast.release()
+    cv2.destroyAllWindows()
+    #fast.release()
     print('Writer release..')
     writer.release()
     
