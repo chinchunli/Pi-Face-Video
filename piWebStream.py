@@ -12,13 +12,14 @@ class WebcamVideoStream(object):
         self.stream = cv2.VideoCapture(src)
         #self.stream.set(3, self.weight)		# I have found this to be about the highest-
         #self.stream.set(4, self.height)
-        #_, self.frame = self.stream.read()
-        
+        self.grabbed, self.frame = self.stream.read()
+        self.height, self.width, channels = self.frame.shape
 
         # initialize the variable used to indicate if the thread should
         # be stopped
         self.stopped = False
         self.writter = None
+	self.frame_num = 0	
 
     def start(self):
         # start the thread to read frames from the video stream
@@ -33,13 +34,18 @@ class WebcamVideoStream(object):
             if self.stopped:
                 return
             (self.grabbed, self.frame) = self.stream.read()
+	    self.frame_num += 1
 
     def read(self):
         # return the current frame
         return self.frame
 
+
     def stop(self):
         self.stopped = True
+
+    def finish(self):
+	self.thread.join()
 
     def setWriter(self, fileName, param=None):
         #if param is not None:

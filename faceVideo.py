@@ -1,9 +1,9 @@
-from imutils.piWebStream import WebcamVideoStream
+from piWebStream import WebcamVideoStream
 
 #from picamera.array import PiRGBArray
 #from picamera import PiCamera
 import argparse
-import imutils
+#import imutils
 import time
 import cv2
 from ftplib import FTP
@@ -48,8 +48,8 @@ def mouthAlarm(mouthRects, image):
 if __name__ == '__main__':
     import sys
 
-    fast = WebcamVideoStream(src=0).start()
-    vidcap = cv2.VideoCapture('facevideo.mp4')
+    #fast = WebcamVideoStream(src=0).start()
+    vidcap = cv2.VideoCapture('FF1_7_25_2016.mp4')
     success,image = vidcap.read()
     count = 0
     success = True 
@@ -58,28 +58,29 @@ if __name__ == '__main__':
     param_face = {'sf':1.1, 'mNbr':5, 'size':(80, 80)}
     param_mouth = {'sf':1.1, 'mNbr':3, 'size':(40, 40)}
 
-    ftp = FTP('1.34.62.109')
-    ftp.login('bluekidds','aaa71421')
+    #ftp = FTP('1.34.62.109')
+    #ftp.login('bluekidds','aaa71421')
 
    
     while True:
         # grab the frame from camera
-        frame = fast.read()
+        _, frame = vidcap.read()
 
    
         cv2.imshow('face', frame)
-	if cv2.waitKey(5) & 0xFF == ord('p'):
-	    cv2.imwrite('test.png', frame)
+	#if cv2.waitKey(5) & 0xFF == ord('p'):
+	#    cv2.imwrite('test.png', frame)
 
-	if cv2.waitKey(5) & 0xFF == ord('r'):
-            cv2.imwrite('test1.png', frame)
+	#if cv2.waitKey(5) & 0xFF == ord('r'):
+        #    cv2.imwrite('test1.png', frame)
 
-        if cv2.waitKey(5) & 0xFF == ord('a'):
-            cv2.imwrite('test1.mp4', frame)
+        #if cv2.waitKey(5) & 0xFF == ord('a'):
+        #    cv2.imwrite('test1.mp4', frame)
 
         if 0xFF & cv2.waitKey(5)== ord('q'):
             break
 
     cv2.destroyAllWindows()
-    fast.stop()
+    #fast.stop()
+    vidcap.release()
 
