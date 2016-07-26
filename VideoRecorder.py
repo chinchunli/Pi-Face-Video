@@ -9,6 +9,7 @@ from ftplib import FTP
 
 from datetime import date
 import sys
+from connection.pysftp import uploadVideoSFTP
 
 #out = cv2.VideoWriter('output.avi',cv2.cv.CV_FOURCC('M','J','P','G'), 20.0, (640,480))
     
@@ -16,7 +17,7 @@ import sys
 FPS = 10
 PI_ID = 'FF1'   # ID of Device
 TOTAL_FRAMES =  12000 # Change to 30s for test
-TOTAL_SEC = 28800
+TOTAL_SEC = 500
 
 if __name__ == '__main__':
     
@@ -78,4 +79,9 @@ if __name__ == '__main__':
     #fast.release()
     print('Writer release..')
     writer.release()
+
+    print('Starting uploading the files...')
     
+    myDict = {'ip': '1.34.62.109', 'username' : guest, 'password' : guest, 'home': '/home/guest/knightVideo/'}    
+
+    print(uploadVideoSFTP(filename, **myDict)
