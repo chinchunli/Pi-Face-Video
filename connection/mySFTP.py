@@ -2,23 +2,6 @@ import pysftp
 import time
 
 
-class  pysftp:
-    def __init__(self):
-        pysftp.Connection("1.34.62.109", username="None", private_key=None, password="None", port=22, private_key_pass=None, ciphers=None, log=False)
-
-        def cwd(self):
-            self.tp.cwd('/home/guest/Desktop/Facevideo')
-            self.Print(sftp.getcwd())  # is equivalent to sftp.chdir('public')
-            return
-
-        # copy myfile, to the current working directory on the server, preserving modification time
-        def put(self):
-            self.sftp.put('myfile', preserve_mtime=True)
-            self.sftp.pwd
-            return
-
-        def close(sftp):
-            sftp.close()
 
 
 def uploadVideoSFTP(filename, **kwargs):
@@ -31,6 +14,7 @@ def uploadVideoSFTP(filename, **kwargs):
     {'ip': your_ip, 'username': your_usename,
     'password': your_pwd, 'home': your_home}
     '''
+    import pysftp
     try:
         ip = kwargs['ip']
         username = kwargs['username']
@@ -41,7 +25,12 @@ def uploadVideoSFTP(filename, **kwargs):
         raise KeyError('Parameters missing...')
         return False
 
-    with pysftp.Connection(host=ip, username=username, password=password) as sftp:
+
+    cnopts = pysftp.CnOpts()
+    cnopts.hostkeys = None    
+        
+
+    with pysftp.Connection(host=ip, username=username, password=password, cnopts=cnopts) as sftp:
 
         if not sftp.isdir(home_dir):
             sftp.mkdir(home_dir)

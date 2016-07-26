@@ -9,7 +9,7 @@ from ftplib import FTP
 
 from datetime import date
 import sys
-from connection.pysftp import uploadVideoSFTP
+from connection.mySFTP import uploadVideoSFTP
 
 #out = cv2.VideoWriter('output.avi',cv2.cv.CV_FOURCC('M','J','P','G'), 20.0, (640,480))
     
@@ -82,6 +82,7 @@ if __name__ == '__main__':
 
     print('Starting uploading the files...')
     
-    myDict = {'ip': '1.34.62.109', 'username' : guest, 'password' : guest, 'home': '/home/guest/knightVideo/'}    
+    myDict = {'ip': '1.34.62.109', 'username' : 'guest', 'password' : 'guest', 
+	      'home': '/home/guest/knightVideo/'}    
 
-    print(uploadVideoSFTP(filename, **myDict)
+    print(uploadVideoSFTP(filename, **myDict))
