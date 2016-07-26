@@ -13,10 +13,10 @@ import sys
 #out = cv2.VideoWriter('output.avi',cv2.cv.CV_FOURCC('M','J','P','G'), 20.0, (640,480))
     
 
-FPS = 15
+FPS = 10
 PI_ID = 'FF1'   # ID of Device
-TOTAL_FRAMES =  16000 # Change to 30s for test
-TOTAL_SEC = 1800
+TOTAL_FRAMES =  12000 # Change to 30s for test
+TOTAL_SEC = 28800
 
 if __name__ == '__main__':
     
@@ -63,7 +63,7 @@ if __name__ == '__main__':
             
      
         if (time.time() - current) > (FPS/ 20.0):
-            if (query % 50) == 0:
+            if (query % 500) == 0:
 	        print(query, used)
 	    frame = fast.read()
             writer.write(frame)

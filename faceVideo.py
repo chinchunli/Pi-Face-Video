@@ -49,7 +49,7 @@ if __name__ == '__main__':
     import sys
 
     #fast = WebcamVideoStream(src=0).start()
-    vidcap = cv2.VideoCapture('FF1_7_25_2016.mp4')
+    vidcap = cv2.VideoCapture('FF1_7_25_2016.mkv')
     success,image = vidcap.read()
     count = 0
     success = True 
