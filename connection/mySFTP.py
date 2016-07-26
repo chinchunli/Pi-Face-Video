@@ -1,6 +1,7 @@
+from __future__ import print_function
 import pysftp
 import time
-
+import sys
 
 
 
@@ -30,8 +31,7 @@ def uploadVideoSFTP(filename, **kwargs):
     cnopts.hostkeys = None    
         
 
-    with pysftp.Connection(host=ip, username=username, password=password, callback=printTotals
-        , cnopts=cnopts) as sftp:
+    with pysftp.Connection(host=ip, username=username, password=password, cnopts=cnopts) as sftp:
 
         if not sftp.isdir(home_dir):
             sftp.mkdir(home_dir)
@@ -43,12 +43,17 @@ def uploadVideoSFTP(filename, **kwargs):
         else:
             print('New file, uploading start')
 
-        sftp.put(filename)
+        sftp.put(filename, callback=printTotals)
 
         if sftp.exists(filename):
             return True
         else:
             return False
 
-def printTotals(transferred, toBeTransferred):
-    print "Transferred: {0}\tOut of: {1}".format(transferred, toBeTransferred)
+def printTotals(transferred, toBeTransferred): 
+    text = 'Transferred: ' + str(transferred) + ' Out of: ' + str(toBeTransferred)
+    
+    print(text)
+    
+    #print "Transferred: {0}\tOut of: {1}".format(transferred, toBeTransferred)
+   
