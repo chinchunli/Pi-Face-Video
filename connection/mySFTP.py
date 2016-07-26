@@ -30,7 +30,8 @@ def uploadVideoSFTP(filename, **kwargs):
     cnopts.hostkeys = None    
         
 
-    with pysftp.Connection(host=ip, username=username, password=password, cnopts=cnopts) as sftp:
+    with pysftp.Connection(host=ip, username=username, password=password, callback=printTotals
+        , cnopts=cnopts) as sftp:
 
         if not sftp.isdir(home_dir):
             sftp.mkdir(home_dir)
@@ -39,6 +40,8 @@ def uploadVideoSFTP(filename, **kwargs):
         
         if sftp.exists(filename):
             print('Overwritting the file....')
+        else:
+            print('New file, uploading start')
 
         sftp.put(filename)
 
@@ -46,3 +49,6 @@ def uploadVideoSFTP(filename, **kwargs):
             return True
         else:
             return False
+
+def printTotals(transferred, toBeTransferred):
+    print "Transferred: {0}\tOut of: {1}".format(transferred, toBeTransferred)
