@@ -7,7 +7,7 @@ To use the script, please follow instruction below:
 安裝下載此程式
 git clone https://github.com/chinchunli/Pi-Face-Video.git
 
-1.設定機台名稱，第19行中設定， PI_DI = ‘xxxxx’
+1.設定機台名稱，第20行中設定， PI_DI = ‘xxxxx’
 
 2.設定錄影時間，第22行中設定，TOTAL_SEC = 錄影時間 /多少秒
 
