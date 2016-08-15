@@ -11,22 +11,19 @@ from datetime import date
 import sys
 from connection.mySFTP import uploadVideoSFTP
 
-import os
-
 #out = cv2.VideoWriter('output.avi',cv2.cv.CV_FOURCC('M','J','P','G'), 20.0, (640,480))
     
 
 FPS = 10
-PI_ID = 'FF5'   # ID of Device
+PI_ID = 'FFtest'   # ID of Device
 TOTAL_FRAMES =  12000 # Change to 30s for test
 TOTAL_SEC = 120
 
 if __name__ == '__main__':
-   
-    #today = date.today()
-    date_string = time.strftime("%Y-%m-%d-%H:%M")
-    #filename = PI_ID + '_' + str(today.month) + '_' + str(today.day) + '_' + str(today.year) + '.mkv'
-    filename = PI_ID + '_' + date_string + '.mkv'
+    
+    today = date.today()
+    filename = PI_ID + '_' + str(today.month) + '_' + str(today.day) + '_' + str(today.year) + '.mkv'
+    
     
     fast = WebcamVideoStream(src=0, resolution=(1280, 960)).start()
     
@@ -89,5 +86,3 @@ if __name__ == '__main__':
 	      'home': '/home/guest/knightVideo/'}    
 
     print(uploadVideoSFTP(filename, **myDict))
-
-    os.system("shutdown -r now")
