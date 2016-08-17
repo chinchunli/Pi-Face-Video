@@ -1,5 +1,5 @@
 #from imutils.piWebStream import WebcamVideoStream
-from piWebStream import WebcamVideoStream
+from vidUtil.piWebStream import WebcamVideoStream
 #from picamera.array import PiRGBArray
 #from picamera import PiCamera
 import argparse
