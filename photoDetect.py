@@ -36,7 +36,7 @@ def setCascade(cascade_path, objType):
     #elif objType == 'Mouth':
     #    print "Initialize " + objType + " cascade"
     cascade = cv2.CascadeClassifier(cascade_path)
-    if not cascade:
+    if cascade is not None:
         return cascade
     else:
         raise ValueError('Check the path of cascade')
