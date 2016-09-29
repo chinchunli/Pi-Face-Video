@@ -1,6 +1,6 @@
 # External Library
 from vidUtil.piWebStream import WebcamVideoStream
-
+from vidUtil.imgUtil import checkIfRepeat
 
 # Python Library
 import argparse
@@ -66,13 +66,14 @@ def detectAndSaveFaces(videoname, cascade, index):
     flag, frame = cap.read() # Get first image
     firstFrame = np.zeros(frame.shape)
 
+
     while True:
         # grab the frame from camera
         flag, frame = cap.read()
 
-        if img is None:
+        if frame is None:
             break
-        # Add if frame is None then break and close cap
+        # Add if frame is None then break and CLOSE CAP
 
         # initialize for faceDetect module
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -80,8 +81,8 @@ def detectAndSaveFaces(videoname, cascade, index):
         output = ifFaceDetected(gray_equal, cascade, param_face)
 
         if output:
-            ## if checkIfRepeat(firstFrame, gray_equal):
-            ##     continue
+            ##if checkIfRepeat(firstFrame, gray_equal):
+            ##    continue
 
 
             ## save image to index.jpg and index.png
@@ -91,6 +92,7 @@ def detectAndSaveFaces(videoname, cascade, index):
             index += 1
         else:
             continue
+
 
     return index
 
