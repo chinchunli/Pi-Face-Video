@@ -98,11 +98,6 @@ def detectAndSaveFaces(videoname, cascade, index):
 
 
 
-
-
-
-
-
 def main():
     ## Load Videos Directory -> list of videoes
     tar_directory = '/home/bluekidds/projects/Pi-Face-Video/Useful/'
