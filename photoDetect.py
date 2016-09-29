@@ -29,13 +29,13 @@ def fetch_video_names(directory, eof='mkv'):
     return video_list
 
 
-def setCascade(filePath, objType):
+def setCascade(cascade_directory, objType):
     #if objType == 'face':
     #    print "Initialize " + objType + " cascade"
     #    return cv2.CascadeClassifier(filePath)
     #elif objType == 'Mouth':
     #    print "Initialize " + objType + " cascade"
-    return cv2.CascadeClassifier(filePath)
+    return cv2.CascadeClassifier(cascade_directory)
 
 
 def ifFaceDetected(image, cascade, param):
@@ -52,6 +52,7 @@ def ifFaceDetected(image, cascade, param):
                                      minNeighbors = param['mNbr'],
                                      minSize = param['size'],
                                      flags=cv2.CASCADE_FIND_BIGGEST_OBJECT)
+
     if len(rects) == 0:
         return 0
     else:
@@ -108,8 +109,8 @@ def main():
 
     ## Prepare environment for face detect
 
-    faceCascade = setCascade('cascade/haarcascade_frontalface_alt.xml', 'face')
-    profileCascade = setCascade('cascade/haarcascade_profileface.xml', 'face')
+    faceCascade = setCascade("cascade/haarcascade_frontalface_alt.xml", 'face')
+    profileCascade = setCascade("cascade/haarcascade_profileface.xml", 'face')
 
 
     ## For each video, open and detect faces
