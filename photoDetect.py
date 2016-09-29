@@ -16,7 +16,7 @@ import numpy as np
 
 # Global Variables
 param_face = {'sf': 1.1, 'mNbr': 3, 'size': (120, 120)}
-target_directory = None
+target_directory = '/home/bluekidds/projects/Pi-Face-Video/Useful/'
 cascade_directory = '/home/bluekidds/opencv/data/haarcascades'
 
 def fetch_video_names(directory, eof='mkv'):
@@ -88,12 +88,12 @@ def detectAndSaveFaces(videoname, cascade, index):
             ## save image to index.jpg and index.png
             cv2.imwrite("%05d" % index + '.png', output)
             cv2.imwrite("%05d" % index + '.jpg', output)
-            pass
+            print 'Detect Face'
             index += 1
         else:
             continue
 
-
+    cap.release()
     return index
 
 
@@ -105,8 +105,8 @@ def detectAndSaveFaces(videoname, cascade, index):
 
 def main():
     ## Load Videos Directory -> list of videoes
-    tar_directory = '/Users/lizhijun/Downloads/Useful/'
-    directory = '/Users/lizhijun/Downloads/FF4_2016-08-31-07-59_photo/'
+    tar_directory = '/home/bluekidds/projects/Pi-Face-Video/Useful/'
+    directory = '/home/bluekidds/projects/Pi-Face-Video/'
     video_list = fetch_video_names(directory)
 
     index = 0
