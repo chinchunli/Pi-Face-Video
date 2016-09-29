@@ -114,8 +114,8 @@ def main():
 
     ## Prepare environment for face detect
     
-    faceCascade = setCascade(cascade_directory + haarcascade_frontalface_alt.xml, 'face')
-    profileCascade = setCascade(cascade_directory + haarcascade_profileface.xml, 'face')
+    faceCascade = setCascade(cascade_directory + 'haarcascade_frontalface_alt.xml', 'face')
+    profileCascade = setCascade(cascade_directory + 'haarcascade_profileface.xml', 'face')
 
 
     ## For each video, open and detect faces
