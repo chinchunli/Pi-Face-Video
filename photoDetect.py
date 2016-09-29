@@ -76,7 +76,7 @@ def detectAndSaveFaces(videoname, cascade, index):
     while True:
         # grab the frame from camera
         flag, frame = cap.read()
-
+        
         if frame is None:
             break
         # Add if frame is None then break and CLOSE CAP
@@ -92,8 +92,8 @@ def detectAndSaveFaces(videoname, cascade, index):
 
 
             ## save image to index.jpg and index.png
-            cv2.imwrite(target_directory + "%05d" % index + '.png', output)
-            cv2.imwrite(target_directory + "%05d" % index + '.jpg', output)
+            cv2.imwrite(target_directory + "%05d" % index + '.png', frame)
+            cv2.imwrite(target_directory + "%05d" % index + '.jpg', frame)
             print 'Detect Face'
             index += 1
         else:
