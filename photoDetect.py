@@ -17,7 +17,7 @@ import numpy as np
 # Global Variables
 param_face = {'sf': 1.1, 'mNbr': 3, 'size': (120, 120)}
 target_directory = '/home/bluekidds/projects/Pi-Face-Video/Useful/'
-cascade_directory = '/home/bluekidds/opencv/data/haarcascades'
+cascade_directory = '/home/bluekidds/opencv/data/haarcascades/'
 
 def fetch_video_names(directory, eof='mkv'):
 
@@ -66,7 +66,7 @@ def detectAndSaveFaces(videoname, cascade, index):
 
     flag, frame = cap.read() # Get first image
     firstFrame = np.zeros(frame.shape)
-
+    
 
     while True:
         # grab the frame from camera
@@ -109,8 +109,8 @@ def main():
 
     ## Prepare environment for face detect
 
-    faceCascade = setCascade("cascade/haarcascade_frontalface_alt.xml", 'face')
-    profileCascade = setCascade("cascade/haarcascade_profileface.xml", 'face')
+    faceCascade = setCascade("haarcascade_frontalface_alt.xml", 'face')
+    profileCascade = setCascade("haarcascade_profileface.xml", 'face')
 
 
     ## For each video, open and detect faces
