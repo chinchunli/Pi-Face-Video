@@ -86,8 +86,8 @@ def detectAndSaveFaces(videoname, cascade, index):
 
 
             ## save image to index.jpg and index.png
-            cv2.imwrite("%05d" % index + '.png', output)
-            cv2.imwrite("%05d" % index + '.jpg', output)
+            cv2.imwrite(target_directory + "%05d" % index + '.png', output)
+            cv2.imwrite(target_directory + "%05d" % index + '.jpg', output)
             print 'Detect Face'
             index += 1
         else:
