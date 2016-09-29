@@ -87,8 +87,10 @@ def detectAndSaveFaces(videoname, cascade, index):
         output = ifFaceDetected(gray_equal, cascade, param_face)
 
         if output:
-            ##if checkIfRepeat(firstFrame, gray_equal):
-            ##    continue
+            if checkIfRepeat(firstFrame, gray_equal):
+                continue
+            else:
+                firstFrame = gray_equal
 
 
             ## save image to index.jpg and index.png
