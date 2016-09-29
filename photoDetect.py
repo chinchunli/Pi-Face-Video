@@ -36,7 +36,7 @@ def setCascade(cascade_path, objType):
     #elif objType == 'Mouth':
     #    print "Initialize " + objType + " cascade"
     cascade = cv2.CascadeClassifier(cascade_path)
-    if cascade is not None:
+    if not cascade:
         return cascade
     else:
         raise ValueError('Check the path of cascade')
@@ -113,9 +113,9 @@ def main():
     index = 0
 
     ## Prepare environment for face detect
-
-    faceCascade = setCascade("haarcascade_frontalface_alt.xml", 'face')
-    profileCascade = setCascade("haarcascade_profileface.xml", 'face')
+    
+    faceCascade = setCascade(cascade_directory + haarcascade_frontalface_alt.xml, 'face')
+    profileCascade = setCascade(cascade_directory + haarcascade_profileface.xml, 'face')
 
 
     ## For each video, open and detect faces
