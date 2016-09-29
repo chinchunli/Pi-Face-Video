@@ -16,10 +16,11 @@ def mse(imageA, imageB):
 
 
 def checkIfRepeat(frameA, frameB):
-    
+	
     diff = mse(frameA, frameB)
+
     if diff >= THRESHOLD:
-        return True
-    else:
         return False
+    else:
+        return True
 
