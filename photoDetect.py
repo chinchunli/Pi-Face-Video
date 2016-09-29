@@ -70,7 +70,7 @@ def detectAndSaveFaces(videoname, cascade, index):
     #filename = os.path.join(tar_directory + videoname, "%05d" % index + '.png')
 
     flag, frame = cap.read() # Get first image
-    firstFrame = np.zeros(frame.shape)
+    firstFrame = np.zeros(frame.shape[:2])
     
 
     while True:
