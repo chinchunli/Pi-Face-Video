@@ -17,6 +17,7 @@ import numpy as np
 # Global Variables
 param_face = {'sf': 1.1, 'mNbr': 3, 'size': (120, 120)}
 target_directory = None
+cascade_directory = '/home/bluekidds/opencv/data/haarcascades'
 
 def fetch_video_names(directory, eof='mkv'):
 
