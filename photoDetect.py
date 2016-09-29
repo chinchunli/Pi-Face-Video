@@ -29,13 +29,18 @@ def fetch_video_names(directory, eof='mkv'):
     return video_list
 
 
-def setCascade(cascade_directory, objType):
+def setCascade(cascade_path, objType):
     #if objType == 'face':
     #    print "Initialize " + objType + " cascade"
     #    return cv2.CascadeClassifier(filePath)
     #elif objType == 'Mouth':
     #    print "Initialize " + objType + " cascade"
-    return cv2.CascadeClassifier(cascade_directory)
+    cascade = cv2.CascadeClassifier(cascade_path)
+    if cascade is not None:
+        return cascade
+    else:
+        raise ValueError('Check the path of cascade')
+ 
 
 
 def ifFaceDetected(image, cascade, param):
