@@ -15,7 +15,7 @@ import cv2
 import numpy as np
 
 # Global Variables
-param_face = {'sf': 1.1, 'mNbr': 3, 'size': (120, 120)}
+param_face = {'sf': 1.1, 'mNbr': 5, 'size': (120, 120)}
 target_directory = '/home/bluekidds/projects/Pi-Face-Video/Useful/'
 cascade_directory = '/home/bluekidds/opencv/data/haarcascades/'
 
@@ -56,7 +56,7 @@ def ifFaceDetected(image, cascade, param):
                                      scaleFactor = param['sf'],
                                      minNeighbors = param['mNbr'],
                                      minSize = param['size'],
-                                     flags=cv2.CASCADE_FIND_BIGGEST_OBJECT)
+                                     flags=cv2.CASCADE_SCALE_IMAGE)
 
     if len(rects) == 0:
         return [0, None]
