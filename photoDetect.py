@@ -105,7 +105,7 @@ def detectAndSaveFaces(videoname, cascade, index):
             ## save image to index.jpg and index.png
             #cv2.imwrite(target_directory + "%05d" % index + '.png', frame)
             #cv2.imwrite(target_directory + "%05d" % index + '.jpg', frame)
-            cv2.imshow('Detect Face', cv2.drawRects(frame, rects, (0, 255, 0)))
+            cv2.imshow('Detect Face', drawRects(frame, rects, (0, 255, 0)))
             cv2.waitKey(5)
             index += 1
         else:

@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-THRESHOLD = 1000
+THRESHOLD = 8000
 
 def mse(imageA, imageB):
     
