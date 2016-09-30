@@ -59,9 +59,18 @@ def ifFaceDetected(image, cascade, param):
                                      flags=cv2.CASCADE_FIND_BIGGEST_OBJECT)
 
     if len(rects) == 0:
-        return 0
+        return [0, None]
     else:
-        return 1
+        rects[:, 2:] += rects[:, :2]
+        return [1, rects]
+
+
+def drawRects(img, rects, color):
+    for x1, y1, x2, y2 in rects:
+        cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)
+        
+        
+        
 
 def detectAndSaveFaces(videoname, cascade, index):
 
@@ -84,7 +93,7 @@ def detectAndSaveFaces(videoname, cascade, index):
         # initialize for faceDetect module
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         gray_equal = cv2.equalizeHist(gray)
-        output = ifFaceDetected(gray_equal, cascade, param_face)
+        output, rects = ifFaceDetected(gray_equal, cascade, param_face)
 
         if output:
             if checkIfRepeat(firstFrame, gray_equal):
@@ -94,9 +103,10 @@ def detectAndSaveFaces(videoname, cascade, index):
 
 
             ## save image to index.jpg and index.png
-            cv2.imwrite(target_directory + "%05d" % index + '.png', frame)
-            cv2.imwrite(target_directory + "%05d" % index + '.jpg', frame)
-            print 'Detect Face'
+            #cv2.imwrite(target_directory + "%05d" % index + '.png', frame)
+            #cv2.imwrite(target_directory + "%05d" % index + '.jpg', frame)
+            cv2.imshow('Detect Face', cv2.drawRects(frame, rects, (0, 255, 0)))
+            cv2.waitKey(5)
             index += 1
         else:
             continue
