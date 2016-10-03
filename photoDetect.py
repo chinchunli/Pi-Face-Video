@@ -8,7 +8,7 @@ import imutils
 import time
 import os
 import sys
-
+import copy
 
 # OpenCV Library
 import cv2
@@ -16,7 +16,7 @@ import numpy as np
 
 # Global Variables
 param_face = {'sf': 1.1, 'mNbr': 5, 'size': (120, 120)}
-target_directory = '/home/bluekidds/projects/Pi-Face-Video/Useful/'
+target_directory = '/Data/FaceVideo/Useful/'
 cascade_directory = '/home/bluekidds/opencv/data/haarcascades/'
 
 def fetch_video_names(directory, eof='mkv'):
@@ -94,19 +94,21 @@ def detectAndSaveFaces(videoname, cascade, index):
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         gray_equal = cv2.equalizeHist(gray)
         output, rects = ifFaceDetected(gray_equal, cascade, param_face)
-
+        
         if output:
             if checkIfRepeat(firstFrame, gray_equal):
                 continue
             else:
                 firstFrame = gray_equal
-
-
+	    print(output, rects)
+            frame_copy = np.copy(frame)
             ## save image to index.jpg and index.png
-            #cv2.imwrite(target_directory + "%05d" % index + '.png', frame)
-            #cv2.imwrite(target_directory + "%05d" % index + '.jpg', frame)
-            cv2.imshow('Detect Face', drawRects(frame, rects, (0, 255, 0)))
-            cv2.waitKey(5)
+	    drawRects(frame_copy, rects, (0, 255, 0))
+            cv2.imwrite(target_directory + "%05d" % index + '.png', frame)
+            cv2.imwrite(target_directory + "%05d" % index + '.jpg', frame_copy)
+	    
+            #cv2.imshow('Detect Face', frame)
+            #cv2.waitKey(5)
             index += 1
         else:
             continue
@@ -122,7 +124,7 @@ def main():
     directory = '/home/bluekidds/projects/Pi-Face-Video/'
     video_list = fetch_video_names(directory)
 
-    index = 0
+    index = 615
 
     ## Prepare environment for face detect
     
@@ -132,6 +134,7 @@ def main():
 
     ## For each video, open and detect faces
     for videoname in video_list:
+	print videoname
         new_index = detectAndSaveFaces(videoname, faceCascade, index)
         index = new_index
 
